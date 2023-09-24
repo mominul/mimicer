@@ -48,6 +48,7 @@ def patient_view(request):
 def admission_view(request):
     if request.method == 'POST':
         subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=subject_id)
         hadm_id = request.POST.get('hadm_id')
         admittime = request.POST.get('admittime')
         dischtime = request.POST.get('dischtime')
@@ -79,7 +80,9 @@ def admission_view(request):
 def diagnosis_view(request):
     if request.method == 'POST':
         subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=subject_id)
         stay_id = request.POST.get('stay_id')
+        stay_id = Edstay.objects.get(stay_id=stay_id)
         seq_num = request.POST.get('seq_num')
         icd_code = request.POST.get('icd_code')
         icd_version = request.POST.get('icd_version')
@@ -96,7 +99,9 @@ def diagnosis_view(request):
 def edstays_view(request):
     if request.method == 'POST':
         subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=subject_id)
         hadm_id = request.POST.get('hadm_id')
+        hadm_id = Admission.objects.get(hadm_id=hadm_id)
         stay_id = request.POST.get('stay_id')
         intime = request.POST.get('intime')
         outtime = request.POST.get('outtime')
@@ -117,7 +122,9 @@ def edstays_view(request):
 def pyxis_view(request):
     if request.method == 'POST':
         subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=subject_id)
         stay_id = request.POST.get('stay_id')
+        stay_id = Edstay.objects.get(stay_id=stay_id)
         charttime = request.POST.get('charttime')
         med_rn = request.POST.get('med_rn')
         name = request.POST.get('name')
@@ -135,7 +142,9 @@ def pyxis_view(request):
 def triage_view(request):
     if request.method == 'POST':
         subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=subject_id)
         stay_id = request.POST.get('stay_id')
+        stay_id = Edstay.objects.get(stay_id=stay_id)
         temperature = request.POST.get('temperature')
         heartrate = request.POST.get('heartrate')
         resprate = request.POST.get('resprate')

@@ -26,14 +26,6 @@ class Admission(models.Model):
     edouttime = models.DateTimeField(null=True)
     hospital_expire_flag = models.SmallIntegerField(null=True)
 
-class Diagnosis(models.Model):
-    subject_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    stay_id = models.IntegerField(null=False)
-    seq_num = models.IntegerField(null=False)
-    icd_code = models.CharField(max_length=10, null=False)
-    icd_version = models.IntegerField(null=False)
-    icd_title = models.TextField(null=False)
-
 class Edstay(models.Model):
     subject_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
     hadm_id = models.ForeignKey(Admission, on_delete=models.CASCADE)
@@ -45,9 +37,17 @@ class Edstay(models.Model):
     arrival_transport = models.CharField(max_length=50, null=False)
     disposition = models.CharField(max_length=255, null=True)
 
+class Diagnosis(models.Model):
+    subject_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    stay_id = models.ForeignKey(Edstay, on_delete=models.CASCADE)
+    seq_num = models.IntegerField(null=False)
+    icd_code = models.CharField(max_length=10, null=False)
+    icd_version = models.IntegerField(null=False)
+    icd_title = models.TextField(null=False)
+
 class Pyxis(models.Model):
     subject_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    stay_id = models.IntegerField(null=False)
+    stay_id = models.ForeignKey(Edstay, on_delete=models.CASCADE)
     charttime = models.DateTimeField(null=True)
     med_rn = models.SmallIntegerField(null=False)
     name = models.CharField(max_length=255, null=True)
@@ -56,7 +56,7 @@ class Pyxis(models.Model):
 
 class Triage(models.Model):
     subject_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    stay_id = models.IntegerField(null=False)
+    stay_id = models.ForeignKey(Edstay, on_delete=models.CASCADE)
     temperature = models.DecimalField(max_digits=10, decimal_places=4, null=True)
     heartrate = models.DecimalField(max_digits=10, decimal_places=4, null=True)
     resprate = models.DecimalField(max_digits=10, decimal_places=4, null=True)
