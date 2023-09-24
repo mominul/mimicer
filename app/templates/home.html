@@ -24,8 +24,13 @@
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center">
-                <button class="btn btn-primary mr-2">Button 1</button>
-                <button class="btn btn-secondary mr-2">Button 2</button>
+                <a href="{% url "patient_form" %}"><button class="btn btn-primary mr-2">Patient Entry</button></a>
+                <a href="{% url "admission_form" %}"><button class="btn btn-primary mr-2">Admission Entry</button></a>
+                <a href="{% url "diagnosis_form" %}"><button class="btn btn-primary mr-2">Diagnosis Entry</button></a>
+                <a href="{% url "edstays_form" %}"><button class="btn btn-primary mr-2">Edstays Entry</button></a>
+                <a href="{% url "pyxis_form" %}"><button class="btn btn-primary mr-2">Pyxis Entry</button></a>
+                <a href="{% url "triage_form" %}"><button class="btn btn-primary mr-2">Triage Entry</button></a>
+                {% comment %} <button class="btn btn-secondary mr-2">Button 2</button> {% endcomment %}
                 <a href="{% url "logout" %}"><button class="btn btn-success">Logout</button></a>
             </div>
         </div>

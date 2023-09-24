@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 
 def login_view(request):
-    if not request.user.is_authenticated:
-        print("Not Authenticated!")    
+    if not request.user.is_authenticated:  
         if request.method == 'POST':
             email = request.POST['email']
             password = request.POST['password']
