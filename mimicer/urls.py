@@ -20,10 +20,12 @@ from app.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('patient/', patient_view),
-    path('admission/', admission_view),
-    path('diagnosis/', diagnosis_view),
-    path('edstays/', edstays_view),
-    path('pyxis/', pyxis_view),
-    path('triage/', triage_view),
+    path('', login_view),
+    path('logout/', logout_view, name='logout'),
+    path('patient/', patient_view, name='patient_form'),
+    path('admission/', admission_view, name='admission_form'),
+    path('diagnosis/', diagnosis_view, name='diagnosis_form'),
+    path('edstays/', edstays_view, name='edstays_form'),
+    path('pyxis/', pyxis_view, name='pyxis_form'),
+    path('triage/', triage_view, name='triage_form'),
 ]
