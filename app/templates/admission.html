@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Form</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Admission Entry Form</h2>
+        <form action="/admissions/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="subject_id">Subject ID:</label>
+                <input type="text" class="form-control" id="subject_id" name="subject_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hadm_id">HADM ID:</label>
+                <input type="number" class="form-control" id="hadm_id" name="hadm_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="admittime">Admission Time:</label>
+                <input type="datetime-local" class="form-control" id="admittime" name="admittime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dischtime">Discharge Time:</label>
+                <input type="datetime-local" class="form-control" id="dischtime" name="dischtime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="deathtime">Death Time:</label>
+                <input type="datetime-local" class="form-control" id="deathtime" name="deathtime">
+            </div>
+
+            <div class="form-group">
+                <label for="admission_type">Admission Type:</label>
+                <select class="form-control" id="admission_type" name="admission_type">
+                    <option>AMBULATORY OBSERVATION</option>
+                    <option>DIRECT EMER.</option>
+                    <!-- Add other options based on your requirement -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="admit_provider_id">Admit Provider ID:</label>
+                <input type="text" class="form-control" id="admit_provider_id" name="admit_provider_id" required>
+            </div>
+
+            <!-- Add additional fields as needed -->
+
+            <div class="form-group">
+                <label for="admission_location">Admission Location:</label>
+                <select class="form-control" id="admission_location" name="admission_location">
+                    <option value="PHYSICIAN REFERRAL">Physician Referral</option>
+                    <option value="WALK-IN/SELF REFERRAL">Walk-in/Self Referral</option>
+                    <option value="AMBULATORY SURGERY TRANSFER">Ambulatory Surgery Transfer</option>
+                    <option value="INFORMATION NOT AVAILABLE">Information Not Available</option>
+                    <!-- Add other options here -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="discharge_location">Discharge Location:</label>
+                <select class="form-control" id="discharge_location" name="discharge_location">
+                    <option value="HOME">Home</option>
+                    <option value="ACUTE HOSPITAL">Acute Hospital</option>
+                    <option value="SKILLED NURSING FACILITY">Skilled Nursing Facility</option>
+                    <!-- Add other options here -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="insurance">Insurance:</label>
+                <input type="text" class="form-control" id="insurance" name="insurance" required>
+            </div>
+
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <input type="text" class="form-control" id="language" name="language">
+            </div>
+
+            <div class="form-group">
+                <label for="marital_status">Marital Status:</label>
+                <input type="text" class="form-control" id="marital_status" name="marital_status">
+            </div>
+
+            <div class="form-group">
+                <label for="ethnicity">Ethnicity:</label>
+                <input type="text" class="form-control" id="ethnicity" name="ethnicity">
+            </div>
+
+            <div class="form-group">
+                <label for="edregtime">Emergency Department Registration Time:</label>
+                <input type="datetime-local" class="form-control" id="edregtime" name="edregtime">
+            </div>
+
+            <div class="form-group">
+                <label for="edouttime">Emergency Department Out Time:</label>
+                <input type="datetime-local" class="form-control" id="edouttime" name="edouttime">
+            </div>
+
+            <div class="form-group">
+                <label for="hospital_expire_flag">Hospital Expire Flag:</label>
+                <select class="form-control" id="hospital_expire_flag" name="hospital_expire_flag">
+                    <option value="0">Survived</option>
+                    <option value="1">Expired</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

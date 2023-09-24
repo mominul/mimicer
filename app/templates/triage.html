@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triage Information Form</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Triage Information Form</h2>
+        <form action="your_server_endpoint_here" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="subject_id">Subject ID:</label>
+                <input type="number" class="form-control" id="subject_id" name="subject_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stay_id">Stay ID:</label>
+                <input type="number" class="form-control" id="stay_id" name="stay_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="temperature">Temperature (°F):</label>
+                <input type="number" step="0.01" class="form-control" id="temperature" name="temperature" placeholder="Enter temperature in Farenheit">
+            </div>
+
+            <div class="form-group">
+                <label for="heartrate">Heart Rate (bpm):</label>
+                <input type="number" class="form-control" id="heartrate" name="heartrate">
+            </div>
+
+            <div class="form-group">
+                <label for="resprate">Respiratory Rate (breaths/min):</label>
+                <input type="number" class="form-control" id="resprate" name="resprate">
+            </div>
+
+            <div class="form-group">
+                <label for="o2sat">Oxygen Saturation (%):</label>
+                <input type="number" step="0.01" class="form-control" id="o2sat" name="o2sat">
+            </div>
+
+            <div class="form-group">
+                <label for="sbp">Systolic Blood Pressure (mmHg):</label>
+                <input type="number" class="form-control" id="sbp" name="sbp">
+            </div>
+
+            <div class="form-group">
+                <label for="dbp">Diastolic Blood Pressure (mmHg):</label>
+                <input type="number" class="form-control" id="dbp" name="dbp">
+            </div>
+
+            <div class="form-group">
+                <label for="pain">Pain Level (0-10):</label>
+                <input type="number" class="form-control" id="pain" name="pain" min="0" max="10">
+            </div>
+
+            <div class="form-group">
+                <label for="acuity">Acuity Level (1-5):</label>
+                <select class="form-control" id="acuity" name="acuity">
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                    <option value="4">Level 4</option>
+                    <option value="5">Level 5</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="chiefcomplaint">Chief Complaint:</label>
+                <textarea class="form-control" id="chiefcomplaint" name="chiefcomplaint" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Optional JavaScript; jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

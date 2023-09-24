@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyxis Medicine Dispensation Form</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Pyxis Medicine Dispensation Form</h2>
+        <form action="your_server_endpoint_here" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="subject_id">Subject ID:</label>
+                <input type="number" class="form-control" id="subject_id" name="subject_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stay_id">Stay ID:</label>
+                <input type="number" class="form-control" id="stay_id" name="stay_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="charttime">Medication Chart Time:</label>
+                <input type="datetime-local" class="form-control" id="charttime" name="charttime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="med_rn">Medicine Row Number:</label>
+                <input type="number" class="form-control" id="med_rn" name="med_rn" required>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Medicine Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required placeholder="Enter medicine name">
+            </div>
+
+            <div class="form-group">
+                <label for="gsn">Generic Sequence Number (GSN):</label>
+                <input type="text" class="form-control" id="gsn" name="gsn" required placeholder="Enter GSN">
+            </div>
+
+            <div class="form-group">
+                <label for="gsn_rn">GSN Row Number:</label>
+                <input type="number" class="form-control" id="gsn_rn" name="gsn_rn" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Optional JavaScript; jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

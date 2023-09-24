@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ED Stays Entry Form</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>ED Stays Entry Form</h2>
+        <form action="your_server_endpoint_here" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="subject_id">Subject ID:</label>
+                <input type="number" class="form-control" id="subject_id" name="subject_id" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="hadm_id">Hospital Admission ID (Leave empty if not admitted):</label>
+                <input type="number" class="form-control" id="hadm_id" name="hadm_id" placeholder="Ranges from 2000000 - 2999999">
+            </div>
+
+            <div class="form-group">
+                <label for="stay_id">Stay ID:</label>
+                <input type="number" class="form-control" id="stay_id" name="stay_id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="intime">Admission DateTime:</label>
+                <input type="datetime-local" class="form-control" id="intime" name="intime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="outtime">Discharge DateTime:</label>
+                <input type="datetime-local" class="form-control" id="outtime" name="outtime" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select class="form-control" id="gender" name="gender">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="race">Race:</label>
+                <input type="text" class="form-control" id="race" name="race" required placeholder="Enter race or aggregated category">
+            </div>
+
+            <div class="form-group">
+                <label for="arrival_transport">Arrival Transport:</label>
+                <select class="form-control" id="arrival_transport" name="arrival_transport">
+                    <option value="WALK IN">Walk In</option>
+                    <option value="AMBULANCE">Ambulance</option>
+                    <option value="UNKNOWN">Unknown</option>
+                    <option value="OTHER">Other</option>
+                    <option value="HELICOPTER">Helicopter</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="disposition">Disposition:</label>
+                <select class="form-control" id="disposition" name="disposition">
+                    <option value="HOME">Home</option>
+                    <option value="ADMITTED">Admitted</option>
+                    <option value="TRANSFER">Transfer</option>
+                    <option value="LEFT WITHOUT BEING SEEN">Left Without Being Seen</option>
+                    <option value="OTHER">Other</option>
+                    <option value="LEFT AGAINST MEDICAL ADVICE">Left Against Medical Advice</option>
+                    <option value="ELOPED">Eloped</option>
+                    <option value="EXPIRED">Expired</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Optional JavaScript; jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
