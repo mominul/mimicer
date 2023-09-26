@@ -50,25 +50,28 @@
 
 
     <!-- Topbar Start -->
-    <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+    {% for message in messages %}
+    <div id="msg" class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="fa fa-info text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed </small>
+                    <small class="py-2"><i class="fa fa-info text-primary me-2"></i>{{ message }} </small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
-                <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                {% comment %} <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                     <div class="me-3 pe-3 border-end py-2">
                         <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
                     </div>
                     <div class="py-2">
                         <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
                     </div>
-                </div>
+                </div> {% endcomment %}
+                <button type="button" class="btn bg-white btn-close" onclick="$('#msg').remove();" aria-label="Close"></button>
             </div>
         </div>
     </div>
+    {% endfor %}
     <!-- Topbar End -->
 
 
@@ -149,6 +152,14 @@
 
     <!-- Template Javascript -->
     <script src="{% static "js/main.js" %}"></script>
+
+    <script>
+        setTimeout(function(){
+          if ($('#msg').length > 0) {
+          $('#msg').remove();
+          }
+        }, 3000)
+    </script>
 </body>
 
 </html>

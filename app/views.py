@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
+from django.contrib import messages
 from .models import Patient, Admission, Diagnosis, Edstay, Pyxis, Triage
 
 def login_view(request):
@@ -15,9 +16,11 @@ def login_view(request):
                     login(request, user)
                     return render(request, 'home.html')
                 else:
-                    return render(request, 'login.html')
+                    messages.error(request, "Incorrect password!")
+                    return redirect('/')
             else:
-                return render(request, 'login.html')
+                messages.error(request, "Unknown email, please request an signup first!")
+                return redirect('/')
         
         return render(request, 'login.html')
     else:
