@@ -38,5 +38,6 @@ urlpatterns = [
     path('modify/edstays/<int:id>', modify_edstays_view, name='edstays_modify'),
     path('entry/pyxis/<int:id>', pyxis_view, name='pyxis_form'),
     path('modify/pyxis/<int:id>', modify_pyxis_view, name='pyxis_modify'),
-    path('triage/', triage_view, name='triage_form'),
+    path('entry/triage/<int:id>', triage_view, name='triage_form'),
+    path('modify/triage/<int:id>', modify_triage_view, name='triage_modify'),
 ]

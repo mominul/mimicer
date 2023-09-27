@@ -19,59 +19,59 @@
                                 </div>
                             </div> {% endcomment %}
                     
-                            <div class="row mb-3">
+                            {% comment %} <div class="row mb-3">
                                 <label for="stay_id" class="col-sm-4 col-form-label">Stay ID:</label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" id="stay_id" name="stay_id" required>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                     
                             <div class="row mb-3">
                                 <label for="temperature" class="col-sm-4 col-form-label">Temperature (°F):</label>
                                 <div class="col-sm-8">
-                                    <input type="number" step="0.01" class="form-control" id="temperature" name="temperature" placeholder="Enter temperature in Farenheit">
+                                    <input type="number" step="0.01" class="form-control" id="temperature" name="temperature" value="{{temperature}}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="heartrate" class="col-sm-4 col-form-label">Heart Rate (bpm):</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="heartrate" name="heartrate">
+                                    <input type="number" class="form-control" id="heartrate" name="heartrate" value="{{heartrate}}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="resprate" class="col-sm-4 col-form-label">Respiratory Rate (breaths/min):</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="resprate" name="resprate">
+                                    <input type="number" class="form-control" id="resprate" name="resprate" value="{{resprate}}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="o2sat" class="col-sm-4 col-form-label">Oxygen Saturation (%):</label>
                                 <div class="col-sm-8">
-                                    <input type="number" step="0.01" class="form-control" id="o2sat" name="o2sat">
+                                    <input type="number" step="0.01" class="form-control" id="o2sat" name="o2sat" value="{{o2sat}}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="sbp" class="col-sm-4 col-form-label">Systolic Blood Pressure (mmHg):</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="sbp" name="sbp">
+                                    <input type="number" class="form-control" id="sbp" name="sbp" value="{{sbp}}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="dbp" class="col-sm-4 col-form-label">Diastolic Blood Pressure (mmHg):</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="dbp" name="dbp">
+                                    <input type="number" class="form-control" id="dbp" name="dbp" value="{{dbp}}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="pain" class="col-sm-4 col-form-label">Pain Level (0-10):</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="pain" name="pain" min="0" max="10">
+                                    <input type="number" class="form-control" id="pain" name="pain" min="0" max="10" value="{{pain}}">
                                 </div>
                             </div>
                     
@@ -91,7 +91,7 @@
                             <div class="row mb-3">
                                 <label for="chiefcomplaint" class="col-sm-4 col-form-label">Chief Complaint:</label>
                                 <div class="col-sm-8">
-                                    <textarea class="form-control" id="chiefcomplaint" name="chiefcomplaint" rows="3"></textarea>
+                                    <textarea class="form-control" id="chiefcomplaint" name="chiefcomplaint" rows="3">{{chiefcomplaint}}</textarea>
                                 </div>
                             </div>
                     

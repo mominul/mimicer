@@ -231,10 +231,10 @@ def modify_pyxis_view(request, id):
     data['charttime'] = data['charttime'].strftime("%Y-%m-%dT%H:%M")
     return render(request, 'modify-pyxis.html', data)
 
-def triage_view(request):
+def triage_view(request, id):
     if request.method == 'POST':
-        subject_id = request.POST.get('subject_id')
-        subject_id = Patient.objects.get(subject_id=subject_id)
+        # subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=id)
         stay_id = request.POST.get('stay_id')
         stay_id = Edstay.objects.get(stay_id=stay_id)
         temperature = request.POST.get('temperature')
@@ -253,8 +253,28 @@ def triage_view(request):
                         dbp=dbp, pain=pain, acuity=acuity, chiefcomplaint=chiefcomplaint)
         triage.save()
         
-        return redirect('/')
+        return redirect(f'/triage/{id}')
     return render(request, 'triage.html')
+
+def modify_triage_view(request, id):
+    triage = Triage.objects.get(id=id)
+
+    if request.method == "POST":
+        triage.temperature = request.POST.get('temperature')
+        triage.heartrate = request.POST.get('heartrate')
+        triage.resprate = request.POST.get('resprate')
+        triage.o2sat = request.POST.get('o2sat')
+        triage.sbp = request.POST.get('sbp')
+        triage.dbp = request.POST.get('dbp')
+        triage.pain = request.POST.get('pain')
+        triage.acuity = request.POST.get('acuity')
+        triage.chiefcomplaint = request.POST.get('chiefcomplaint')
+
+        triage.save()
+        return redirect(f'/triage/{triage.subject_id.subject_id}')
+    
+    data = triage.__dict__
+    return render(request, 'modify-triage.html', data)
 
 def search_view(request):
     if request.method == "POST":
