@@ -87,13 +87,13 @@
                             <td >{{ info.arrival_transport }}</td>
                             <td >{{ info.disposition }}</td>
                             <td>
-                                <a class="btn btn-primary btn-xs" href=" {# {% url 'approve_publication' info.hadm_id  %} #}"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-primary btn-xs" href="{% url 'edstays_modify' info.stay_id  %}"><i class="fas fa-edit"></i></a>
                             </td>
                         </tr>
                         {% endfor %}
                     </table>
                     <div class="text-lg-end">
-                        <button class="btn btn-dark px-4">Add</button>
+                        <a class="btn btn-dark px-4" href="{% url "edstays_form" subject_id %}">Add</a>
                     </div>
                 </div>
             </div>

@@ -134,10 +134,10 @@ def diagnosis_view(request):
         return redirect('/')
     return render(request, 'diagnosis.html')
 
-def edstays_view(request):
+def edstays_view(request, id):
     if request.method == 'POST':
-        subject_id = request.POST.get('subject_id')
-        subject_id = Patient.objects.get(subject_id=subject_id)
+        # subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=id)
         hadm_id = request.POST.get('hadm_id')
         hadm_id = Admission.objects.get(hadm_id=hadm_id)
         stay_id = request.POST.get('stay_id')
@@ -154,8 +154,28 @@ def edstays_view(request):
                         arrival_transport=arrival_transport, disposition=disposition)
         edstay.save()
         
-        return redirect('/')
+        return redirect(f'/edstays/{id}')
     return render(request, 'edstays.html')
+
+def modify_edstays_view(request, id):
+    if request.method == "POST":
+        edstay = Edstay.objects.get(stay_id=id)
+
+        edstay.intime = request.POST.get('intime')
+        edstay.outtime = request.POST.get('outtime')
+        edstay.gender = request.POST.get('gender')
+        edstay.race = request.POST.get('race')
+        edstay.arrival_transport = request.POST.get('arrival_transport')
+        edstay.disposition = request.POST.get('disposition')
+
+        edstay.save()
+        return redirect(f'/edstays/{edstay.subject_id.subject_id}')
+
+    edstay = Edstay.objects.get(stay_id=id)
+    data = edstay.__dict__
+    data['intime'] = data['intime'].strftime("%Y-%m-%dT%H:%M")
+    data['outtime'] = data['outtime'].strftime("%Y-%m-%dT%H:%M")
+    return render(request, 'modify-edstays.html', data)
 
 def pyxis_view(request):
     if request.method == 'POST':

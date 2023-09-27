@@ -19,7 +19,7 @@
                                 </div>
                             </div>{% endcomment %}
                     
-                            <div class="row mb-3">
+                            {% comment %} <div class="row mb-3">
                                 <label for="hadm_id" class="col-sm-4 col-form-label">Hospital Admission ID:</label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" id="hadm_id" name="hadm_id" placeholder="Ranges from 2000000 - 2999999">
@@ -31,19 +31,19 @@
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" id="stay_id" name="stay_id" required>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                     
                             <div class="row mb-3">
                                 <label for="intime" class="col-sm-4 col-form-label">Admission DateTime:</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" class="form-control" id="intime" name="intime" required>
+                                    <input type="datetime-local" class="form-control" id="intime" name="intime" value="{{ intime }}" required>
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="outtime" class="col-sm-4 col-form-label">Discharge DateTime:</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" class="form-control" id="outtime" name="outtime" required>
+                                    <input type="datetime-local" class="form-control" id="outtime" name="outtime" value="{{outtime}}" required>
                                 </div>
                             </div>
                     
@@ -61,7 +61,7 @@
                             <div class="row mb-3">
                                 <label for="race" class="col-sm-4 col-form-label">Ethnicity:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="race" name="race" required placeholder="Enter race or aggregated category">
+                                    <input type="text" class="form-control" id="race" name="race" value="{{race}}" required placeholder="Enter race or aggregated category">
                                 </div>
                             </div>
                     
