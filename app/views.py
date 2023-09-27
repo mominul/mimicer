@@ -166,3 +166,86 @@ def triage_view(request):
         
         return redirect('/')
     return render(request, 'triage.html')
+
+def search_view(request):
+    if request.method == "POST":
+        search = request.POST["search"]
+        try:
+            patient = Patient.objects.get(subject_id=search)
+            data = patient.__dict__
+            return render(request, 'view-patient.html', data)
+        except:
+            print("Not Found!")
+            pass
+    
+    return render(request, 'view-patient.html')
+
+def view_patient_view(request, id):
+    patient = Patient.objects.get(subject_id=id)
+    data = patient.__dict__
+    return render(request, 'view-patient.html', data)
+
+def view_admission_view(request, id):
+    admissions = Admission.objects.filter(subject_id=id)
+    items = []
+    for item in admissions:
+        items.append(item.__dict__)
+    
+    data = {
+        'subject_id': id,
+        'data': items
+    }
+    
+    return render(request, 'view-admission.html', data)
+
+def view_edstays_view(request, id):
+    edstays = Edstay.objects.filter(subject_id=id)
+    items = []
+    for item in edstays:
+        items.append(item.__dict__)
+    
+    data = {
+        'subject_id': id,
+        'data': items
+    }
+    
+    return render(request, 'view-edstay.html', data)
+
+def view_diagnosis_view(request, id):
+    diagnosis = Diagnosis.objects.filter(subject_id=id)
+    items = []
+    for item in diagnosis:
+        items.append(item.__dict__)
+    
+    data = {
+        'subject_id': id,
+        'data': items
+    }
+    
+    return render(request, 'view-diagnosis.html', data)
+
+def view_pyxis_view(request, id):
+    pyxis = Pyxis.objects.filter(subject_id=id)
+    items = []
+    for item in pyxis:
+        items.append(item.__dict__)
+    
+    data = {
+        'subject_id': id,
+        'data': items
+    }
+    
+    return render(request, 'view-pyxis.html', data)
+
+def view_triage_view(request, id):
+    triage = Triage.objects.filter(subject_id=id)
+    items = []
+    for item in triage:
+        items.append(item.__dict__)
+    
+    data = {
+        'subject_id': id,
+        'data': items
+    }
+    
+    return render(request, 'view-triage.html', data)
