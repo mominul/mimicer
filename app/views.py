@@ -193,10 +193,10 @@ def modify_edstays_view(request, id):
     data['outtime'] = data['outtime'].strftime("%Y-%m-%dT%H:%M")
     return render(request, 'modify-edstays.html', data)
 
-def pyxis_view(request):
+def pyxis_view(request, id):
     if request.method == 'POST':
-        subject_id = request.POST.get('subject_id')
-        subject_id = Patient.objects.get(subject_id=subject_id)
+        # subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=id)
         stay_id = request.POST.get('stay_id')
         stay_id = Edstay.objects.get(stay_id=stay_id)
         charttime = request.POST.get('charttime')
@@ -210,8 +210,26 @@ def pyxis_view(request):
                       med_rn=med_rn, name=name, gsn_rn=gsn_rn, gsn=gsn)
         pyxis.save()
         
-        return redirect('/')
+        return redirect(f'/pyxis/{id}')
     return render(request, 'pyxis.html')
+
+def modify_pyxis_view(request, id):
+    if request.method == "POST":
+        pyxis = Pyxis.objects.get(id=id)
+
+        pyxis.charttime = request.POST.get('charttime')
+        pyxis.med_rn = request.POST.get('med_rn')
+        pyxis.name = request.POST.get('name')
+        pyxis.gsn_rn = request.POST.get('gsn_rn')
+        pyxis.gsn = request.POST.get('gsn')
+
+        pyxis.save()
+        return redirect(f'/pyxis/{pyxis.subject_id.subject_id}')
+    
+    pyxis = Pyxis.objects.get(id=id)
+    data = pyxis.__dict__
+    data['charttime'] = data['charttime'].strftime("%Y-%m-%dT%H:%M")
+    return render(request, 'modify-pyxis.html', data)
 
 def triage_view(request):
     if request.method == 'POST':
