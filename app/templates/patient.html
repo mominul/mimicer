@@ -1,65 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Patient Information</title>
-  <!-- Include Bootstrap CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-  <div class="container mt-5">
-    <h1 class="mb-4">Enter Patient Information</h1>
-    <form method="POST">
-      <!-- CSRF Token for Django -->
-      {% csrf_token %}
+{% block body %}
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+    <a href="index.html" class="navbar-brand p-0">
+        <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="about.html" class="nav-item nav-link">About</a>
+            <a href="service.html" class="nav-item nav-link">Service</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu m-0">
+                    <a href="price.html" class="dropdown-item">Pricing Plan</a>
+                    <a href="team.html" class="dropdown-item">Our Dentist</a>
+                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                    <a href="appointment.html" class="dropdown-item">Appointment</a>
+                </div>
+            </div>
+            <a href="contact.html" class="nav-item nav-link">Contact</a>
+        </div>
+        <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa fa-search"></i></button>
+        <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+    </div>
+</nav>
+<!-- Navbar End -->
 
-      <!-- Subject ID -->
-      <div class="form-group">
-        <label for="subject_id">Subject ID:</label>
-        <input type="number" class="form-control" id="subject_id" name="subject_id" required>
-      </div>
 
-      <!-- Gender -->
-      <div class="form-group">
-        <label for="gender">Gender:</label>
-        <select class="form-control" id="gender" name="gender" required>
-          <option value="M">Male</option>
-          <option value="F">Female</option>
-        </select>
-      </div>
+<!-- Full Screen Search Start -->
+<div class="modal fade" id="searchModal" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
+            <div class="modal-header border-0">
+                <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-center">
+                <div class="input-group" style="max-width: 600px;">
+                    <input type="text" class="form-control bg-transparent border-primary p-3" placeholder="Type search keyword">
+                    <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Full Screen Search End -->
 
-      <!-- Anchor Age -->
-      <div class="form-group">
-        <label for="anchor_age">Anchor Age:</label>
-        <input type="number" class="form-control" id="anchor_age" name="anchor_age" required>
-      </div>
 
-      <!-- Anchor Year -->
-      <div class="form-group">
-        <label for="anchor_year">Anchor Year:</label>
-        <input type="number" class="form-control" id="anchor_year" name="anchor_year" required>
-      </div>
 
-      <!-- Anchor Year Group -->
-      <div class="form-group">
-        <label for="anchor_year_group">Anchor Year Group:</label>
-        <input type="text" class="form-control" id="anchor_year_group" name="anchor_year_group" required>
-      </div>
 
-      <!-- Date of Death -->
-      <div class="form-group">
-        <label for="dod">Date of Death:</label>
-        <input type="datetime-local" class="form-control" id="dod" name="dod">
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-
-  <!-- Include Bootstrap JS (optional) -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+<!-- Offer Start -->
+<div class="container-fluid my-5 py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 wow zoomIn" data-wow-delay="0.6s">
+                <div class="offer-text text-center rounded p-5">
+                    <!-- <h1 class="display-9 text-white">Login</h1> -->
+                      <h1 class="mb-4">Enter Patient Information</h1>
+                      <form action="/entry/patient/" method="POST">
+                          <!-- CSRF Token for Django -->
+                          {% csrf_token %}
+                          
+                          <div class="row mb-3">
+                              <label for="subject_id" class="col-sm-4 col-form-label">Subject ID:</label>
+                              <div class="col-sm-8">
+                                  <input type="number" class="form-control" id="subject_id" name="subject_id" required>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="gender" class="col-sm-4 col-form-label">Gender:</label>
+                              <div class="col-sm-8">
+                                  <select class="form-control" id="gender" name="gender" required>
+                                      <option value="M">Male</option>
+                                      <option value="F">Female</option>
+                                  </select>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="anchor_age" class="col-sm-4 col-form-label">Anchor Age:</label>
+                              <div class="col-sm-8">
+                                  <input type="number" class="form-control" id="anchor_age" name="anchor_age" required>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="anchor_year" class="col-sm-4 col-form-label">Anchor Year:</label>
+                              <div class="col-sm-8">
+                                  <input type="number" class="form-control" id="anchor_year" name="anchor_year" required>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="anchor_year_group" class="col-sm-4 col-form-label">Anchor Year Group:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="anchor_year_group" name="anchor_year_group" required>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="dod" class="col-sm-4 col-form-label">Date of Death:</label>
+                              <div class="col-sm-8">
+                                  <input type="datetime-local" class="form-control" id="dod" name="dod">
+                              </div>
+                          </div>
+                  
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <button type="submit" class="btn btn-primary">Submit</button>
+                              </div>
+                          </div>
+                      </form>
+                  
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Offer End -->
+{% endblock body %}

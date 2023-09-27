@@ -63,10 +63,10 @@
                     <!-- <h1 class="display-9 text-white">Login</h1> -->
                     <!-- <div class="container mt-5"> -->
                         <h2 class="mb-5">Admission Entry Form</h2>
-                        <form method="POST">
+                        <form action="" method="POST">
                             {% csrf_token %}
                             
-                            <div class="row mb-3">
+                            {% comment %} <div class="row mb-3">
                                 <label for="subject_id" class="col-sm-4 col-form-label">Subject ID:</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" id="subject_id" name="subject_id" value="{{ subject_id }}" required>
@@ -76,35 +76,35 @@
                             <div class="row mb-3">
                                 <label for="hadm_id" class="col-sm-4 col-form-label">Hospital Admission ID:</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="hadm_id" name="hadm_id" required>
+                                    <input type="number" class="form-control" id="hadm_id" name="hadm_id" value="{{ hadm_id }}" required>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                     
                             <div class="row mb-3">
                                 <label for="admittime" class="col-sm-4 col-form-label">Admission Time:</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" class="form-control" id="admittime" name="admittime" required>
+                                    <input type="datetime-local" class="form-control" id="admittime" name="admittime" value="{{ admittime }}" required>
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="dischtime" class="col-sm-4 col-form-label">Discharge Time:</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" class="form-control" id="dischtime" name="dischtime" required>
+                                    <input type="datetime-local" class="form-control" id="dischtime" name="dischtime" value="{{ dischtime }}" required>
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="deathtime" class="col-sm-4 col-form-label">Death Time:</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" class="form-control" id="deathtime" name="deathtime">
+                                    <input type="datetime-local" class="form-control" id="deathtime" name="deathtime" value="{{ deathtime }}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="admission_type" class="col-sm-4 col-form-label">Admission Type:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="admission_type" name="admission_type">
+                                    <select class="form-control" id="admission_type" name="admission_type" value="{{ admission_type }}">
                                         <option>AMBULATORY OBSERVATION</option>
                                         <option>DIRECT EMER.</option>
                                     </select>
@@ -114,14 +114,14 @@
                             <div class="row mb-3">
                                 <label for="admit_provider_id" class="col-sm-4 col-form-label">Admit Provider ID:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="admit_provider_id" name="admit_provider_id" required>
+                                    <input type="text" class="form-control" id="admit_provider_id" name="admit_provider_id" value="{{ admit_provider_id }}" required>
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="admission_location" class="col-sm-4 col-form-label">Admission Location:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="admission_location" name="admission_location">
+                                    <select class="form-control" id="admission_location" name="admission_location" value="{{ admission_location }}">
                                         <option value="PHYSICIAN REFERRAL">Physician Referral</option>
                                         <option value="WALK-IN/SELF REFERRAL">Walk-in/Self Referral</option>
                                         <option value="AMBULATORY SURGERY TRANSFER">Ambulatory Surgery Transfer</option>
@@ -133,7 +133,7 @@
                             <div class="row mb-3">
                                 <label for="discharge_location" class="col-sm-4 col-form-label">Discharge Location:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="discharge_location" name="discharge_location">
+                                    <select class="form-control" id="discharge_location" name="discharge_location" value="{{ discharge_location }}">
                                         <option value="HOME">Home</option>
                                         <option value="ACUTE HOSPITAL">Acute Hospital</option>
                                         <option value="SKILLED NURSING FACILITY">Skilled Nursing Facility</option>
@@ -144,49 +144,49 @@
                             <div class="row mb-3">
                                 <label for="insurance" class="col-sm-4 col-form-label">Insurance:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="insurance" name="insurance" required>
+                                    <input type="text" class="form-control" id="insurance" name="insurance" value="{{ insurance }}" required>
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="language" class="col-sm-4 col-form-label">Language:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="language" name="language">
+                                    <input type="text" class="form-control" id="language" name="language" value="{{ language }}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="marital_status" class="col-sm-4 col-form-label">Marital Status:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="marital_status" name="marital_status">
+                                    <input type="text" class="form-control" id="marital_status" name="marital_status" value="{{ marital_status }}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="ethnicity" class="col-sm-4 col-form-label">Ethnicity:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="ethnicity" name="ethnicity">
+                                    <input type="text" class="form-control" id="ethnicity" name="ethnicity" value="{{ race }}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="edregtime" class="col-sm-4 col-form-label">Emergency Department Registration Time:</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" class="form-control" id="edregtime" name="edregtime">
+                                    <input type="datetime-local" class="form-control" id="edregtime" name="edregtime" value="{{ edregtime }}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="edouttime" class="col-sm-4 col-form-label">Emergency Department Out Time:</label>
                                 <div class="col-sm-8">
-                                    <input type="datetime-local" class="form-control" id="edouttime" name="edouttime">
+                                    <input type="datetime-local" class="form-control" id="edouttime" name="edouttime" value="{{ edouttime }}">
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="hospital_expire_flag" class="col-sm-4 col-form-label">Hospital Expire Flag:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="hospital_expire_flag" name="hospital_expire_flag">
+                                    <select class="form-control" id="hospital_expire_flag" name="hospital_expire_flag" value="{{ hospital_expire_flag }}">
                                         <option value="0">Survived</option>
                                         <option value="1">Expired</option>
                                     </select>

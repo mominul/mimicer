@@ -45,10 +45,10 @@ def patient_view(request):
                           anchor_year=anchor_year, anchor_year_group=anchor_year_group, dod=dod)
         patient.save()
         
-        return redirect('/')
+        return redirect(f'/patient/{subject_id}')
     return render(request, 'patient.html')
 
-def admission_view(request):
+def admission_view(request, id):
     if request.method == 'POST':
         subject_id = request.POST.get('subject_id')
         subject_id = Patient.objects.get(subject_id=subject_id)
@@ -77,8 +77,43 @@ def admission_view(request):
                               edouttime=edouttime, hospital_expire_flag=hospital_expire_flag)
         admission.save()
         
-        return redirect('/')
-    return render(request, 'admission.html')
+        return redirect(f'/admission/{id}')
+    data = {
+        'subject_id': id,
+    }
+    return render(request, 'admission.html', data)
+
+def modify_admission_view(request, id):
+    if request.method == "POST":
+        admission = Admission.objects.get(hadm_id=id)
+
+        admission.admittime = request.POST.get('admittime')
+        admission.dischtime = request.POST.get('dischtime')
+        admission.deathtime = request.POST.get('deathtime')
+        admission.admission_type = request.POST.get('admission_type')
+        admission.admit_provider_id = request.POST.get('admit_provider_id')
+        admission.admission_location = request.POST.get('admission_location')
+        admission.discharge_location = request.POST.get('discharge_location')
+        admission.insurance = request.POST.get('insurance')
+        admission.language = request.POST.get('language')
+        admission.marital_status = request.POST.get('marital_status')
+        admission.race = request.POST.get('ethnicity')
+        admission.edregtime = request.POST.get('edregtime')
+        admission.edouttime = request.POST.get('edouttime')
+        admission.hospital_expire_flag = request.POST.get('hospital_expire_flag')
+
+        admission.save()
+
+        return redirect(f'/admission/{admission.subject_id.subject_id}')
+
+    admission = Admission.objects.get(hadm_id=id)
+    data = admission.__dict__
+    data['admittime'] = data['admittime'].strftime("%Y-%m-%dT%H:%M")
+    data['dischtime'] = data['dischtime'].strftime("%Y-%m-%dT%H:%M")
+    data['deathtime'] = data['deathtime'].strftime("%Y-%m-%dT%H:%M")
+    data['edregtime'] = data['edregtime'].strftime("%Y-%m-%dT%H:%M")
+    data['edouttime'] = data['edouttime'].strftime("%Y-%m-%dT%H:%M")
+    return render(request, 'modify-admission.html', data)
 
 def diagnosis_view(request):
     if request.method == 'POST':
@@ -175,8 +210,8 @@ def search_view(request):
             data = patient.__dict__
             return render(request, 'view-patient.html', data)
         except:
-            print("Not Found!")
-            pass
+            messages.error(request, "Patient not found! Please create a new patient through this form!")
+            return render(request, 'patient.html')
     
     return render(request, 'view-patient.html')
 
@@ -189,6 +224,7 @@ def view_admission_view(request, id):
     admissions = Admission.objects.filter(subject_id=id)
     items = []
     for item in admissions:
+        print(item.__dict__)
         items.append(item.__dict__)
     
     data = {
@@ -241,6 +277,7 @@ def view_triage_view(request, id):
     triage = Triage.objects.filter(subject_id=id)
     items = []
     for item in triage:
+        print(item.__dict__)
         items.append(item.__dict__)
     
     data = {

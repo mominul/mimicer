@@ -102,19 +102,15 @@
             <div class="row justify-content-center">
                 <div class="col-lg-7 wow zoomIn" data-wow-delay="0.6s">
                     <div class="offer-text text-center rounded p-5">
-                        <h1 class="display-9 text-white">Login</h1>
-                        <form method="POST">
-                            <!-- {% csrf_token %} -->
+                        <h1 class="display-9 text-white">Search Patient</h1>
+                        <form action="/search/" method="POST">
+                            {% csrf_token %}
                             <div class="mb-3">
                                 <!-- <label for="email">Email:</label> -->
-                                <input type="email" class="form-control bg-light border-0" style="height: 55px;" id="email" placeholder="Enter email" name="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <!-- <label for="pwd">Password:</label> -->
-                                <input type="password" class="form-control bg-light border-0" style="height: 55px;" id="pwd" placeholder="Enter password" name="password" required>
+                                <input type="text" class="form-control bg-light border-0" style="height: 55px;" id="search" placeholder="Enter subject id" name="search" required>
                             </div>
                             
-                            <button type="submit" class="btn btn-dark py-3 px-5 me-3">Login</button>
+                            <button type="submit" class="btn btn-dark py-3 px-5 me-3">Search</button>
                         </form>
                     </div>
                 </div>
