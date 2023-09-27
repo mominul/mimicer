@@ -19,24 +19,24 @@
                                 </div>
                             </div> {% endcomment %}
                     
-                            <div class="row mb-3">
+                            {% comment %} <div class="row mb-3">
                                 <label for="stay_id" class="col-sm-4 col-form-label">Stay ID:</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="stay_id" name="stay_id" required>
+                                    <input type="number" class="form-control" id="stay_id" name="stay_id" value="{{stay_id_id}}" required>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                     
                             <div class="row mb-3">
                                 <label for="seq_num" class="col-sm-4 col-form-label">Sequence Number:</label>
                                 <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="seq_num" name="seq_num" required>
+                                    <input type="number" class="form-control" id="seq_num" name="seq_num" value="{{seq_num}}" required>
                                 </div>
                             </div>
                     
                             <div class="row mb-3">
                                 <label for="icd_code" class="col-sm-4 col-form-label">ICD Code:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="icd_code" name="icd_code" required>
+                                    <input type="text" class="form-control" id="icd_code" name="icd_code" value="{{icd_code}}" required>
                                 </div>
                             </div>
                     
@@ -53,7 +53,7 @@
                             <div class="row mb-3">
                                 <label for="icd_title" class="col-sm-4 col-form-label">ICD Title:</label>
                                 <div class="col-sm-8">
-                                    <textarea class="form-control" id="icd_title" name="icd_title" rows="3" required></textarea>
+                                    <textarea class="form-control" id="icd_title" name="icd_title" rows="3" required>{{icd_title}}</textarea>
                                 </div>
                             </div>
                     

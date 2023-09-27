@@ -115,10 +115,10 @@ def modify_admission_view(request, id):
     data['edouttime'] = data['edouttime'].strftime("%Y-%m-%dT%H:%M")
     return render(request, 'modify-admission.html', data)
 
-def diagnosis_view(request):
+def diagnosis_view(request, id):
     if request.method == 'POST':
-        subject_id = request.POST.get('subject_id')
-        subject_id = Patient.objects.get(subject_id=subject_id)
+        # subject_id = request.POST.get('subject_id')
+        subject_id = Patient.objects.get(subject_id=id)
         stay_id = request.POST.get('stay_id')
         stay_id = Edstay.objects.get(stay_id=stay_id)
         seq_num = request.POST.get('seq_num')
@@ -131,8 +131,24 @@ def diagnosis_view(request):
                               icd_code=icd_code, icd_version=icd_version, icd_title=icd_title)
         diagnosis.save()
         
-        return redirect('/')
+        return redirect(f'/diagnosis/{id}')
     return render(request, 'diagnosis.html')
+
+def modify_diagnosis_view(request, id):
+    if request.method == "POST":
+        diagnosis = Diagnosis.objects.get(id=id)
+
+        diagnosis.seq_num = request.POST.get('seq_num')
+        diagnosis.icd_code = request.POST.get('icd_code')
+        diagnosis.icd_version = request.POST.get('icd_version')
+        diagnosis.icd_title = request.POST.get('icd_title')
+
+        diagnosis.save()
+        return redirect(f'/diagnosis/{diagnosis.subject_id.subject_id}')
+
+    diagnosis = Diagnosis.objects.get(id=id)
+    data = diagnosis.__dict__
+    return render(request, 'modify-diagnosis.html', data)
 
 def edstays_view(request, id):
     if request.method == 'POST':
