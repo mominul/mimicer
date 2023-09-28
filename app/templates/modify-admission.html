@@ -52,9 +52,14 @@
                             <div class="row mb-3">
                                 <label for="admission_type" class="col-sm-4 col-form-label">Admission Type:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="admission_type" name="admission_type" value="{{ admission_type }}">
-                                        <option>AMBULATORY OBSERVATION</option>
-                                        <option>DIRECT EMER.</option>
+                                    <select class="form-control" id="admission_type" name="admission_type">
+                                        {% for option in option_admission_type %}
+                                            {% if option == admission_type %}
+                                            <option selected>{{option}}</option>
+                                            {% else %}
+                                            <option>{{option}}</option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -69,11 +74,14 @@
                             <div class="row mb-3">
                                 <label for="admission_location" class="col-sm-4 col-form-label">Admission Location:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="admission_location" name="admission_location" value="{{ admission_location }}">
-                                        <option value="PHYSICIAN REFERRAL">Physician Referral</option>
-                                        <option value="WALK-IN/SELF REFERRAL">Walk-in/Self Referral</option>
-                                        <option value="AMBULATORY SURGERY TRANSFER">Ambulatory Surgery Transfer</option>
-                                        <option value="INFORMATION NOT AVAILABLE">Information Not Available</option>
+                                    <select class="form-control" id="admission_location" name="admission_location">
+                                        {% for option, value in option_admission_location.items %}
+                                            {% if option == admission_location %}
+                                            <option value="{{option}}" selected>{{value}}</option>
+                                            {% else %}
+                                            <option value="{{option}}">{{value}}</option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -81,10 +89,14 @@
                             <div class="row mb-3">
                                 <label for="discharge_location" class="col-sm-4 col-form-label">Discharge Location:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="discharge_location" name="discharge_location" value="{{ discharge_location }}">
-                                        <option value="HOME">Home</option>
-                                        <option value="ACUTE HOSPITAL">Acute Hospital</option>
-                                        <option value="SKILLED NURSING FACILITY">Skilled Nursing Facility</option>
+                                    <select class="form-control" id="discharge_location" name="discharge_location">
+                                        {% for option, value in option_discharge_location.items %}
+                                            {% if option == discharge_location %}
+                                            <option value="{{option}}" selected>{{value}}</option>
+                                            {% else %}
+                                            <option value="{{option}}">{{value}}</option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -134,9 +146,14 @@
                             <div class="row mb-3">
                                 <label for="hospital_expire_flag" class="col-sm-4 col-form-label">Hospital Expire Flag:</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control" id="hospital_expire_flag" name="hospital_expire_flag" value="{{ hospital_expire_flag }}">
-                                        <option value="0">Survived</option>
-                                        <option value="1">Expired</option>
+                                    <select class="form-control" id="hospital_expire_flag" name="hospital_expire_flag">
+                                        {% for option, value in option_hospital_expire_flag.items %}
+                                            {% if option == hospital_expire_flag %}
+                                            <option value="{{option}}" selected>{{value}}</option>
+                                            {% else %}
+                                            <option value="{{option}}">{{value}}</option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>

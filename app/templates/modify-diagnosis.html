@@ -44,8 +44,13 @@
                                 <label for="icd_version" class="col-sm-4 col-form-label">ICD Version:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="icd_version" name="icd_version">
-                                        <option value="9">ICD-9</option>
-                                        <option value="10">ICD-10</option>
+                                        {% for option, value in option_icd_version.items %}
+                                            {% if option == icd_version %}
+                                            <option value="{{option}}" selected>{{value}}</option>
+                                            {% else %}
+                                            <option value="{{option}}">{{value}}</option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>

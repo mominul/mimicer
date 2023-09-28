@@ -51,9 +51,13 @@
                                 <label for="gender" class="col-sm-4 col-form-label">Gender:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="gender" name="gender">
-                                        <option value="M">Male</option>
-                                        <option value="F">Female</option>
-                                        <option value="O">Other</option>
+                                        {% for option, value in value_gender.items %}
+                                            {% if option == gender %}
+                                            <option value="{{option}}" selected>{{value}}</option>
+                                            {% else %}
+                                            <option value="{{option}}">{{value}}</option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -69,11 +73,13 @@
                                 <label for="arrival_transport" class="col-sm-4 col-form-label">Arrival Transport:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="arrival_transport" name="arrival_transport">
-                                        <option value="WALK IN">Walk In</option>
-                                        <option value="AMBULANCE">Ambulance</option>
-                                        <option value="UNKNOWN">Unknown</option>
-                                        <option value="OTHER">Other</option>
-                                        <option value="HELICOPTER">Helicopter</option>
+                                        {% for option, value in option_arrival_transport.items %}
+                                            {% if option == arrival_transport %}
+                                            <option value="{{option}}" selected>{{value}}</option>
+                                            {% else %}
+                                            <option value="{{option}}">{{value}}</option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -82,14 +88,13 @@
                                 <label for="disposition" class="col-sm-4 col-form-label">Disposition:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control" id="disposition" name="disposition">
-                                        <option value="HOME">Home</option>
-                                        <option value="ADMITTED">Admitted</option>
-                                        <option value="TRANSFER">Transfer</option>
-                                        <option value="LEFT WITHOUT BEING SEEN">Left Without Being Seen</option>
-                                        <option value="OTHER">Other</option>
-                                        <option value="LEFT AGAINST MEDICAL ADVICE">Left Against Medical Advice</option>
-                                        <option value="ELOPED">Eloped</option>
-                                        <option value="EXPIRED">Expired</option>
+                                        {% for option, value in option_disposition.items %}
+                                            {% if option == disposition %}
+                                            <option value="{{option}}" selected>{{value}}</option>
+                                            {% else %}
+                                            <option value="{{option}}">{{value}}</option>
+                                            {% endif %}
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>

@@ -109,6 +109,22 @@ def modify_admission_view(request, id):
 
     admission = Admission.objects.get(hadm_id=id)
     data = admission.__dict__
+    data['option_admission_type'] = ['AMBULATORY OBSERVATION', 'DIRECT EMER.']
+    data['option_admission_location'] = {
+        "PHYSICIAN REFERRAL": "Physician Referral",
+        "WALK-IN/SELF REFERRAL":"Walk-in/Self Referral",
+        "AMBULATORY SURGERY TRANSFER":"Ambulatory Surgery Transfer",
+        "INFORMATION NOT AVAILABLE":"Information Not Available",
+    }
+    data['option_discharge_location'] = {
+        "HOME":"Home",
+        "ACUTE HOSPITAL":"Acute Hospital",
+        "SKILLED NURSING FACILITY":"Skilled Nursing Facility",
+    }
+    data['option_hospital_expire_flag'] = {
+        0:"Survived",
+        1:"Expired"
+    }
     data['admittime'] = data['admittime'].strftime("%Y-%m-%dT%H:%M")
     data['dischtime'] = data['dischtime'].strftime("%Y-%m-%dT%H:%M")
     data['deathtime'] = data['deathtime'].strftime("%Y-%m-%dT%H:%M")
@@ -149,6 +165,10 @@ def modify_diagnosis_view(request, id):
 
     diagnosis = Diagnosis.objects.get(id=id)
     data = diagnosis.__dict__
+    data['option_icd_version'] = {
+        "9":"ICD-9",
+        "10":"ICD-10"
+    }
     return render(request, 'modify-diagnosis.html', data)
 
 def edstays_view(request, id):
@@ -190,6 +210,28 @@ def modify_edstays_view(request, id):
 
     edstay = Edstay.objects.get(stay_id=id)
     data = edstay.__dict__
+    data['value_gender'] = {
+        "M":"Male",
+        "F":"Female",
+        "O":"Other"
+    }
+    data['option_arrival_transport'] = {
+        "WALK IN":"Walk In",
+        "AMBULANCE":"Ambulance",
+        "UNKNOWN":"Unknown",
+        "OTHER":"Other",
+        "HELICOPTER":"Helicopter",
+    }
+    data['option_disposition'] = {
+        "HOME":"Home",
+        "ADMITTED":"Admitted",
+        "TRANSFER":"Transfer",
+        "LEFT WITHOUT BEING SEEN":"Left Without Being Seen",
+        "OTHER":"Other",
+        "LEFT AGAINST MEDICAL ADVICE":"Left Against Medical Advice",
+        "ELOPED":"Eloped",
+        "EXPIRED":"Expired"
+    }
     data['intime'] = data['intime'].strftime("%Y-%m-%dT%H:%M")
     data['outtime'] = data['outtime'].strftime("%Y-%m-%dT%H:%M")
     return render(request, 'modify-edstays.html', data)
@@ -275,6 +317,13 @@ def modify_triage_view(request, id):
         return redirect(f'/triage/{triage.subject_id.subject_id}')
     
     data = triage.__dict__
+    data['option_acuity'] = {
+        "1":"Level 1",
+        "2":"Level 2",
+        "3":"Level 3",
+        "4":"Level 4",
+        "5":"Level 5"
+    }
     return render(request, 'modify-triage.html', data)
 
 def search_view(request):
