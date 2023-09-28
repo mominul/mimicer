@@ -83,7 +83,7 @@
                             <th >Hospital Expire Flag</th>
                             <th></th>
                         </tr>
-                        {% for info in data %}
+                        {% for info in page_obj %}
                         <tr>
                             <td>{{ info.hadm_id }}</td>
                             <td>{{ info.admittime }}</td>
@@ -107,6 +107,33 @@
                         {% endfor %}
                     </table>
                     <div class="text-lg-end">
+                        <ul class="pagination pagination-sm">
+                            {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">First</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                            </li>
+                            {% endif %}
+                
+                            {% for num in page_obj.paginator.page_range %}
+                            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                            {% endfor %}
+                
+                            {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="text-lg-end">
                         <a class="btn btn-dark px-4" href="{% url "admission_form" subject_id %}">Add</a>
                     </div>
                 </div>
@@ -117,6 +144,8 @@
                     frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
                     tabindex="0"></iframe>
             </div> -->
+                <!-- Pagination Buttons -->
+    
         </div>
     </div>
 </div>

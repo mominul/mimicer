@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .models import Patient, Admission, Diagnosis, Edstay, Pyxis, Triage
 
 def login_view(request):
@@ -296,67 +297,70 @@ def view_patient_view(request, id):
 
 def view_admission_view(request, id):
     admissions = Admission.objects.filter(subject_id=id)
-    items = []
-    for item in admissions:
-        print(item.__dict__)
-        items.append(item.__dict__)
+
+    paginator = Paginator(admissions, 5)  # Show 5 admissions per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     
     data = {
         'subject_id': id,
-        'data': items
+        'page_obj': page,
     }
     
     return render(request, 'view-admission.html', data)
 
 def view_edstays_view(request, id):
     edstays = Edstay.objects.filter(subject_id=id)
-    items = []
-    for item in edstays:
-        items.append(item.__dict__)
+
+    paginator = Paginator(edstays, 5)  # Show 5 edstays per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     
     data = {
         'subject_id': id,
-        'data': items
+        'page_obj': page
     }
     
     return render(request, 'view-edstay.html', data)
 
 def view_diagnosis_view(request, id):
     diagnosis = Diagnosis.objects.filter(subject_id=id)
-    items = []
-    for item in diagnosis:
-        items.append(item.__dict__)
+
+    paginator = Paginator(diagnosis, 5)  # Show 5 diagnosis per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     
     data = {
         'subject_id': id,
-        'data': items
+        'page_obj': page
     }
     
     return render(request, 'view-diagnosis.html', data)
 
 def view_pyxis_view(request, id):
     pyxis = Pyxis.objects.filter(subject_id=id)
-    items = []
-    for item in pyxis:
-        items.append(item.__dict__)
+
+    paginator = Paginator(pyxis, 5)  # Show 5 pyxis per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     
     data = {
         'subject_id': id,
-        'data': items
+        'page_obj': page
     }
     
     return render(request, 'view-pyxis.html', data)
 
 def view_triage_view(request, id):
     triage = Triage.objects.filter(subject_id=id)
-    items = []
-    for item in triage:
-        print(item.__dict__)
-        items.append(item.__dict__)
+    
+    paginator = Paginator(triage, 5)  # Show 5 triage per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
     
     data = {
         'subject_id': id,
-        'data': items
+        'page_obj': page
     }
     
     return render(request, 'view-triage.html', data)
