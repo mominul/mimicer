@@ -64,48 +64,51 @@
                 </form> -->
                 <div class="bg-light rounded h-100 p-5">
                     <h2 class="mb-4">Patient - {{ subject_id }} - Admission</h2>
-                    <table class="table table-hover table-bordered" >
-                        <tr>
-                            <th>Hospital Admission ID</th>
-                            <th>Admission Time</th>
-                            <th>Discharge Time</th>
-                            <th>Death Time</th>
-                            <th>Admission Type</th>
-                            <th >Admit Provider ID</th>
-                            <th >Admission Location</th>
-                            <th >Discharge Location</th>
-                            <th >Insurance</th>
-                            <th >Language</th>
-                            <th >Marital Status</th>
-                            <th >Ethnicity</th>
-                            <th >Emergency Department Registration Time</th>
-                            <th >Emergency Department Out Time</th>
-                            <th >Hospital Expire Flag</th>
-                            <th></th>
-                        </tr>
-                        {% for info in page_obj %}
-                        <tr>
-                            <td>{{ info.hadm_id }}</td>
-                            <td>{{ info.admittime }}</td>
-                            <td>{{ info.dischtime }}</td>
-                            <td>{{ info.deathtime }}</td>
-                            <td>{{ info.admission_type }}</td>
-                            <td >{{ info.admit_provider_id }}</td>
-                            <td >{{ info.admission_location }}</td>
-                            <td >{{ info.discharge_location }}</td>
-                            <td >{{ info.insurance }}</td>
-                            <td >{{ info.language }}</td>
-                            <td >{{ info.marital_status }}</td>
-                            <td >{{ info.race }}</td>
-                            <td >{{ info.edregtime }}</td>
-                            <td >{{ info.edouttime }}</td>
-                            <td >{{ info.hospital_expire_flag }}</td>
-                            <td>
-                                <a class="btn btn-primary btn-xs" href="{% url 'admission_modify' info.hadm_id %}"><i class="fas fa-edit"></i></a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </table>
+                    <div style="overflow-x: auto;">
+                        <table class="table table-hover table-bordered small-font">
+                            <tr>
+                                <th>Hospital Admission ID</th>
+                                <th>Admission Time</th>
+                                <th>Discharge Time</th>
+                                <th>Death Time</th>
+                                <th>Admission Type</th>
+                                <th >Admit Provider ID</th>
+                                <th >Admission Location</th>
+                                <th >Discharge Location</th>
+                                <th >Insurance</th>
+                                <th >Language</th>
+                                <th >Marital Status</th>
+                                <th >Ethnicity</th>
+                                <th >Emergency Department Registration Time</th>
+                                <th >Emergency Department Out Time</th>
+                                <th >Hospital Expire Flag</th>
+                                <th></th>
+                            </tr>
+                            {% for info in page_obj %}
+                            <tr>
+                                <td>{{ info.hadm_id }}</td>
+                                <td>{{ info.admittime }}</td>
+                                <td>{{ info.dischtime }}</td>
+                                <td>{{ info.deathtime }}</td>
+                                <td>{{ info.admission_type }}</td>
+                                <td >{{ info.admit_provider_id }}</td>
+                                <td >{{ info.admission_location }}</td>
+                                <td >{{ info.discharge_location }}</td>
+                                <td >{{ info.insurance }}</td>
+                                <td >{{ info.language }}</td>
+                                <td >{{ info.marital_status }}</td>
+                                <td >{{ info.race }}</td>
+                                <td >{{ info.edregtime }}</td>
+                                <td >{{ info.edouttime }}</td>
+                                <td >{{ info.hospital_expire_flag }}</td>
+                                <td>
+                                    <a class="btn btn-primary btn-xs" href="{% url 'admission_modify' info.hadm_id %}"><i class="fas fa-edit"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    
                     <div class="text-lg-end">
                         <ul class="pagination pagination-sm">
                             {% if page_obj.has_previous %}
