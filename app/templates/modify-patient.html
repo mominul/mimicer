@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<!-- Offer Start -->
+<div class="container-fluid my-5 py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 wow zoomIn" data-wow-delay="0.6s">
+                <div class="offer-text text-center rounded p-5">
+                    <!-- <h1 class="display-9 text-white">Login</h1> -->
+                      <h1 class="mb-4">Enter Patient Information</h1>
+                      <form action="" method="POST">
+                          <!-- CSRF Token for Django -->
+                          {% csrf_token %}
+                          
+                          {% comment %} <div class="row mb-3">
+                              <label for="subject_id" class="col-sm-4 col-form-label">Subject ID:</label>
+                              <div class="col-sm-8">
+                                  <input type="number" class="form-control" id="subject_id" name="subject_id" required>
+                              </div>
+                          </div> {% endcomment %}
+                  
+                          <div class="row mb-3">
+                              <label for="gender" class="col-sm-4 col-form-label">Gender:</label>
+                              <div class="col-sm-8">
+                                  <select class="form-control" id="gender" name="gender" required>
+                                      {% for option, value in option_gender.items %}
+                                            {% if option == gender %}
+                                            <option value="{{option}}" selected>{{value}}</option>
+                                            {% else %}
+                                            <option value="{{option}}">{{value}}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                  </select>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="anchor_age" class="col-sm-4 col-form-label">Anchor Age:</label>
+                              <div class="col-sm-8">
+                                  <input type="number" class="form-control" id="anchor_age" name="anchor_age" value="{{anchor_age}}" required>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="anchor_year" class="col-sm-4 col-form-label">Anchor Year:</label>
+                              <div class="col-sm-8">
+                                  <input type="number" class="form-control" id="anchor_year" name="anchor_year" value="{{anchor_year}}" required>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="anchor_year_group" class="col-sm-4 col-form-label">Anchor Year Group:</label>
+                              <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="anchor_year_group" name="anchor_year_group" value="{{anchor_year_group}}" required>
+                              </div>
+                          </div>
+                  
+                          <div class="row mb-3">
+                              <label for="dod" class="col-sm-4 col-form-label">Date of Death:</label>
+                              <div class="col-sm-8">
+                                  <input type="datetime-local" class="form-control" id="dod" name="dod" value="{{dod}}">
+                              </div>
+                          </div>
+                  
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <button type="submit" class="btn btn-primary">Submit</button>
+                              </div>
+                          </div>
+                      </form>
+                  
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Offer End -->
+{% endblock body %}

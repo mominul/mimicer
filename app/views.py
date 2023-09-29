@@ -49,6 +49,27 @@ def patient_view(request):
         return redirect(f'/patient/{subject_id}')
     return render(request, 'patient.html')
 
+def modify_patient(request, id):
+    patient = Patient.objects.get(subject_id=id)
+    if request.method == 'POST':
+        patient.gender = request.POST.get('gender')
+        patient.anchor_age = request.POST.get('anchor_age')
+        patient.anchor_year = request.POST.get('anchor_year')
+        patient.anchor_year_group = request.POST.get('anchor_year_group')
+        patient.dod = request.POST.get('dod')
+
+        patient.save()
+        return redirect(f'/patient/{id}')
+    
+    data = patient.__dict__
+    data['option_gender'] = {
+        "M":"Male",
+        "F":"Female",
+    }
+    data['dod'] = data['dod'].strftime("%Y-%m-%dT%H:%M")
+
+    return render(request, 'modify-patient.html', data)
+
 def admission_view(request, id):
     if request.method == 'POST':
         subject_id = request.POST.get('subject_id')

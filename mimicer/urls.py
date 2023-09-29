@@ -30,6 +30,7 @@ urlpatterns = [
     path('triage/<int:id>', view_triage_view, name='triage_view'),
     path('logout/', logout_view, name='logout'),
     path('entry/patient/', patient_view, name='patient_form'),
+    path('modify/patient/<int:id>', modify_patient, name='patient_modify'),
     path('entry/admission/<int:id>', admission_view, name='admission_form'),
     path('modify/admission/<int:id>', modify_admission_view, name='admission_modify'),
     path('entry/diagnosis/<int:id>', diagnosis_view, name='diagnosis_form'),
