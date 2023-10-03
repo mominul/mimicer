@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'mimicer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE', 'mimicer'),
+        'NAME': os.environ.get('MYSQL_DATABASE', 'mimicer2'),
         'USER': os.environ.get('MYSQL_USER', 'root'),
         'PASSWORD': os.environ.get('MYSQL_PASSWORD', ''),
         'HOST': os.environ.get('MYSQL_DATABASE_HOST', '127.0.0.1'),
