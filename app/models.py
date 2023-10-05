@@ -28,7 +28,7 @@ class Admission(models.Model):
 
 class Edstay(models.Model):
     subject_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    hadm_id = models.ForeignKey(Admission, on_delete=models.CASCADE)
+    hadm_id = models.ForeignKey(Admission, on_delete=models.CASCADE, null=True)
     stay_id = models.IntegerField(primary_key=True)
     intime = models.DateTimeField(null=False)
     outtime = models.DateTimeField(null=False)
