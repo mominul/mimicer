@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 from .models import Patient, Admission, Diagnosis, Edstay, Pyxis, Triage
 
 def login_view(request):
@@ -434,3 +435,12 @@ def view_triage_view(request, id):
     }
     
     return render(request, 'view-triage.html', data)
+
+def patient_id_search(request):
+    query = request.GET.get('query')
+    matches = Patient.objects.filter(subject_id__icontains=query)[:5]
+
+    # Extract the matching values into a list
+    match_list = [match.subject_id for match in matches]
+
+    return JsonResponse(match_list, safe=False)

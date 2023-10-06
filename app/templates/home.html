@@ -54,7 +54,9 @@
                             {% csrf_token %}
                             <div class="mb-3">
                                 <!-- <label for="email">Email:</label> -->
-                                <input type="text" class="form-control bg-light border-0" style="height: 55px;" id="search" placeholder="Enter subject id" name="search" required>
+                                <input type="text" class="form-control bg-light border-0" style="height: 55px;" id="searchInput" placeholder="Enter subject id" name="search" list="suggestions" autocomplete="off" required>
+                                <datalist id="suggestions">
+                                </datalist>
                             </div>
                             
                             <button type="submit" class="btn btn-dark py-3 px-5 me-3">Search</button>
@@ -65,4 +67,40 @@
         </div>
     </div>
     <!-- Offer End -->
+
+    <script>
+        const inputBox = document.getElementById("searchInput");
+
+        inputBox.addEventListener("input", function() {
+            const inputValue = inputBox.value.trim();
+
+            if (inputValue === "") {
+                // Clear the datalist when the input is empty
+                document.getElementById("suggestions").innerHTML = "";
+                return;
+            }
+
+            const endpoint = `{% url "get_patients" %}?query=${inputValue}`;
+
+            // Send a GET request to the endpoint
+            fetch(endpoint)
+                .then(response => response.json())
+                .then(data => {
+                    const datalist = document.getElementById("suggestions");
+
+                    // Clear previous options
+                    datalist.innerHTML = "";
+
+                    // Add new options based on JSON response
+                    data.forEach(item => {
+                        const option = document.createElement("option");
+                        option.value = item;
+                        datalist.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+        });
+    </script>
 {% endblock body %}
