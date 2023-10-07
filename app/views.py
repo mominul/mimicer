@@ -68,7 +68,8 @@ def modify_patient(request, id):
         "M":"Male",
         "F":"Female",
     }
-    data['dod'] = data['dod'].strftime("%Y-%m-%dT%H:%M")
+    if data['dod']:
+        data['dod'] = data['dod'].strftime("%Y-%m-%dT%H:%M")
 
     return render(request, 'modify-patient.html', data)
 
@@ -148,11 +149,16 @@ def modify_admission_view(request, id):
         0:"Survived",
         1:"Expired"
     }
-    data['admittime'] = data['admittime'].strftime("%Y-%m-%dT%H:%M")
-    data['dischtime'] = data['dischtime'].strftime("%Y-%m-%dT%H:%M")
-    data['deathtime'] = data['deathtime'].strftime("%Y-%m-%dT%H:%M")
-    data['edregtime'] = data['edregtime'].strftime("%Y-%m-%dT%H:%M")
-    data['edouttime'] = data['edouttime'].strftime("%Y-%m-%dT%H:%M")
+    if data['admittime']:
+        data['admittime'] = data['admittime'].strftime("%Y-%m-%dT%H:%M")
+    if data['dischtime']:
+        data['dischtime'] = data['dischtime'].strftime("%Y-%m-%dT%H:%M")
+    if data['deathtime']:
+        data['deathtime'] = data['deathtime'].strftime("%Y-%m-%dT%H:%M")
+    if data['edregtime']:
+        data['edregtime'] = data['edregtime'].strftime("%Y-%m-%dT%H:%M")
+    if data['edouttime']:
+        data['edouttime'] = data['edouttime'].strftime("%Y-%m-%dT%H:%M")
     return render(request, 'modify-admission.html', data)
 
 def diagnosis_view(request, id):
@@ -255,8 +261,10 @@ def modify_edstays_view(request, id):
         "ELOPED":"Eloped",
         "EXPIRED":"Expired"
     }
-    data['intime'] = data['intime'].strftime("%Y-%m-%dT%H:%M")
-    data['outtime'] = data['outtime'].strftime("%Y-%m-%dT%H:%M")
+    if data['intime']:
+        data['intime'] = data['intime'].strftime("%Y-%m-%dT%H:%M")
+    if data['outtime']:
+        data['outtime'] = data['outtime'].strftime("%Y-%m-%dT%H:%M")
     return render(request, 'modify-edstays.html', data)
 
 def pyxis_view(request, id):
@@ -294,7 +302,8 @@ def modify_pyxis_view(request, id):
     
     pyxis = Pyxis.objects.get(id=id)
     data = pyxis.__dict__
-    data['charttime'] = data['charttime'].strftime("%Y-%m-%dT%H:%M")
+    if data['charttime']:
+        data['charttime'] = data['charttime'].strftime("%Y-%m-%dT%H:%M")
     return render(request, 'modify-pyxis.html', data)
 
 def triage_view(request, id):
