@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.utils.timezone import now
 from .models import Patient, Admission, Diagnosis, Edstay, Pyxis, Triage
 
 def login_view(request):
@@ -76,7 +77,7 @@ def admission_view(request, id):
         subject_id = request.POST.get('subject_id')
         subject_id = Patient.objects.get(subject_id=subject_id)
         hadm_id = request.POST.get('hadm_id')
-        admittime = request.POST.get('admittime')
+        admittime = now()
         dischtime = request.POST.get('dischtime')
         deathtime = request.POST.get('deathtime')
         admission_type = request.POST.get('admission_type')
@@ -200,7 +201,7 @@ def edstays_view(request, id):
         hadm_id = request.POST.get('hadm_id')
         hadm_id = Admission.objects.get(hadm_id=hadm_id)
         stay_id = request.POST.get('stay_id')
-        intime = request.POST.get('intime')
+        intime = now()
         outtime = request.POST.get('outtime')
         gender = request.POST.get('gender')
         race = request.POST.get('race')
@@ -442,5 +443,63 @@ def patient_id_search(request):
 
     # Extract the matching values into a list
     match_list = [match.subject_id for match in matches]
+
+    return JsonResponse(match_list, safe=False)
+
+def hadm_id_search(request):
+    query = request.GET.get('query')
+    matches = Admission.objects.filter(hadm_id__icontains=query)[:5]
+
+    # Extract the matching values into a list
+    match_list = [match.hadm_id for match in matches]
+
+    return JsonResponse(match_list, safe=False)
+
+def stay_id_search(request):
+    query = request.GET.get('query')
+    matches = Edstay.objects.filter(stay_id__icontains=query)[:5]
+
+    # Extract the matching values into a list
+    match_list = [match.stay_id for match in matches]
+
+    return JsonResponse(match_list, safe=False)
+
+def medicine_search(request):
+    query = request.GET.get('query')
+    matches = Pyxis.objects.filter(name__icontains=query)[:5]
+
+    # Extract the matching values into a list
+    match_list = [match.name for match in matches]
+    match_list = list(dict.fromkeys(match_list))
+
+    return JsonResponse(match_list, safe=False)
+
+def gsn_search(request):
+    query = request.GET.get('query')
+    matches = Pyxis.objects.filter(gsn__icontains=query)[:5]
+
+    # Extract the matching values into a list
+    match_list = [match.gsn for match in matches]
+    match_list = list(dict.fromkeys(match_list))
+
+    return JsonResponse(match_list, safe=False)
+
+def icd_code_search(request):
+    query = request.GET.get('query')
+    matches = Diagnosis.objects.filter(icd_code__icontains=query)[:5]
+
+    # Extract the matching values into a list
+    match_list = [match.icd_code for match in matches]
+    match_list = list(dict.fromkeys(match_list))
+
+    return JsonResponse(match_list, safe=False)
+
+def icd_title_search(request):
+    query = request.GET.get('query')
+    matches = Diagnosis.objects.filter(icd_title__icontains=query)[:5]
+
+    # Extract the matching values into a list
+    match_list = [match.icd_title for match in matches]
+    match_list = list(dict.fromkeys(match_list))
 
     return JsonResponse(match_list, safe=False)

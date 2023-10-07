@@ -48,5 +48,11 @@ urlpatterns = [
     path('entry/triage/<int:id>', triage_view, name='triage_form'),
     path('modify/triage/<int:id>', modify_triage_view, name='triage_modify'),
 
-    path('get/patients', patient_id_search, name="get_patients")
+    path('get/patients', patient_id_search, name="get_patients"),
+    path('get/hadm', hadm_id_search, name="get_hadm_id"),
+    path('get/stay', stay_id_search, name="get_stay_id"),
+    path('get/medicine', medicine_search, name="get_medicine"),
+    path('get/gsn', gsn_search, name="get_gsn"),
+    path('get/icd_code', icd_code_search, name="get_icd_code"),
+    path('get/icd_title', icd_title_search, name="get_icd_title"),
 ]
