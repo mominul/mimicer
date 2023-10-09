@@ -7,6 +7,10 @@ from django.http import JsonResponse
 from django.utils.timezone import now
 from .models import Patient, Admission, Diagnosis, Edstay, Pyxis, Triage
 
+# Convert empty string to None
+def else_none(s):
+    return s or None
+
 def login_view(request):
     if not request.user.is_authenticated:  
         if request.method == 'POST':
@@ -41,7 +45,7 @@ def patient_view(request):
         anchor_age = request.POST.get('anchor_age')
         anchor_year = request.POST.get('anchor_year')
         anchor_year_group = request.POST.get('anchor_year_group')
-        dod = request.POST.get('dod')
+        dod = else_none(request.POST.get('dod'))
         
         # Create and save a new Patient object
         patient = Patient(subject_id=subject_id, gender=gender, anchor_age=anchor_age,
@@ -58,7 +62,7 @@ def modify_patient(request, id):
         patient.anchor_age = request.POST.get('anchor_age')
         patient.anchor_year = request.POST.get('anchor_year')
         patient.anchor_year_group = request.POST.get('anchor_year_group')
-        patient.dod = request.POST.get('dod')
+        patient.dod = else_none(request.POST.get('dod'))
 
         patient.save()
         return redirect(f'/patient/{id}')
@@ -79,8 +83,8 @@ def admission_view(request, id):
         subject_id = Patient.objects.get(subject_id=subject_id)
         hadm_id = request.POST.get('hadm_id')
         admittime = now()
-        dischtime = request.POST.get('dischtime')
-        deathtime = request.POST.get('deathtime')
+        dischtime = else_none(request.POST.get('dischtime'))
+        deathtime = else_none(request.POST.get('deathtime'))
         admission_type = request.POST.get('admission_type')
         admit_provider_id = request.POST.get('admit_provider_id')
         admission_location = request.POST.get('admission_location')
@@ -89,8 +93,8 @@ def admission_view(request, id):
         language = request.POST.get('language')
         marital_status = request.POST.get('marital_status')
         race = request.POST.get('ethnicity')
-        edregtime = request.POST.get('edregtime')
-        edouttime = request.POST.get('edouttime')
+        edregtime = else_none(request.POST.get('edregtime'))
+        edouttime = else_none(request.POST.get('edouttime'))
         hospital_expire_flag = request.POST.get('hospital_expire_flag')
         
         # Create and save a new Admission object
@@ -113,8 +117,8 @@ def modify_admission_view(request, id):
         admission = Admission.objects.get(hadm_id=id)
 
         admission.admittime = request.POST.get('admittime')
-        admission.dischtime = request.POST.get('dischtime')
-        admission.deathtime = request.POST.get('deathtime')
+        admission.dischtime = else_none(request.POST.get('dischtime'))
+        admission.deathtime = else_none(request.POST.get('deathtime'))
         admission.admission_type = request.POST.get('admission_type')
         admission.admit_provider_id = request.POST.get('admit_provider_id')
         admission.admission_location = request.POST.get('admission_location')
@@ -123,8 +127,8 @@ def modify_admission_view(request, id):
         admission.language = request.POST.get('language')
         admission.marital_status = request.POST.get('marital_status')
         admission.race = request.POST.get('ethnicity')
-        admission.edregtime = request.POST.get('edregtime')
-        admission.edouttime = request.POST.get('edouttime')
+        admission.edregtime = else_none(request.POST.get('edregtime'))
+        admission.edouttime = else_none(request.POST.get('edouttime'))
         admission.hospital_expire_flag = request.POST.get('hospital_expire_flag')
 
         admission.save()
