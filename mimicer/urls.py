@@ -55,4 +55,6 @@ urlpatterns = [
     path('get/gsn', gsn_search, name="get_gsn"),
     path('get/icd_code', icd_code_search, name="get_icd_code"),
     path('get/icd_title', icd_title_search, name="get_icd_title"),
+
+    path('modify/discharge/<int:id>', discharge_patient, name='discharge_patient')
 ]

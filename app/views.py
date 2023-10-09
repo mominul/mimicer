@@ -394,6 +394,14 @@ def view_admission_view(request, id):
     
     return render(request, 'view-admission.html', data)
 
+def discharge_patient(request, id):
+    admission = Admission.objects.get(hadm_id=id)
+
+    admission.dischtime = now()
+    admission.save()
+
+    return redirect(f'/admission/{admission.subject_id.subject_id}')
+
 def view_edstays_view(request, id):
     edstays = Edstay.objects.filter(subject_id=id)
 
